@@ -5,5 +5,160 @@ sources:
     schema: main
     tables:
       - name: dime_2022_raw
-        identifier: dime_2022_raw
-        description: Source table loaded by Meltano.
+        description: >-
+          The contribution database includes a complete set of contribution records grouped by
+          election cycle. Each row represents and individual transaction between a donor and recipient.
+          (Loaded by meltano; source: https://data.stanford.edu/dime)
+        columns:
+          - name: cycle
+            description: >-
+              Election Cycle.
+          - name: transaction.id
+            description: >-
+              A primary key that contains a unique transaction id for each record.
+          - name: transaction.type
+            description: >-
+              FEC code for transaction type.
+          - name: amount
+            description: >-
+              Dollar amount of the contribution.
+          - name: date
+            description: >-
+              Transaction date of the contribution.
+          - name: bonica.cid
+            description: >-
+              A unique contributor id assigned to each individual and organization in the database.
+          - name: contributor.name
+            description: >-
+              Complete name of contributor (last, first); suffix and title removed.
+          - name: contributor.lname
+            description: >-
+              Last name of contributor.
+          - name: contributor.fname
+            description: >-
+              First name of contributor.
+          - name: contributor.mname
+            description: >-
+              Middle name or initial of contributor.
+          - name: contributor.suffix
+            description: >-
+              Suffix of contributor (e.g. Jr., Sr.).
+          - name: contributor.title
+            description: >-
+              Title of contributor (e.g. Mr., Mrs., Dr., Esq).
+          - name: contributor.ffname
+            description: >-
+              Concatenates first name, middle name, suffix, and title.
+          - name: contributor.type
+            description: >-
+              ('I' = individual; 'C' = committee or organization).
+          - name: contributor.gender
+            description: >-
+              Contributor gender coding ('M' = male; 'F' = female; 'U' = unknown). Gender codes are
+              based on an automated coding scheme that incorporates information gender ratios of
+              first names as reported by the U.S. Census and gender-specific titles
+              (e.g. Mrs., Mr., Jr., Sr).
+          - name: contributor.address
+            description: >-
+              Contributor's self-reported street address.
+          - name: contributor.city
+            description: >-
+              Contributor's self-reported name city/municipality.
+          - name: contributor.state
+            description: >-
+              Contributor's self-reported state.
+          - name: contributor.zipcode
+            description: >-
+              Contributor's self-reported zip-code (5 or 9 digits).
+          - name: contributor.occupation
+            description: >-
+              Contributor's self-reported occupational title.
+          - name: contributor.employer
+            description: >-
+              Contributor's self-reported employer.
+          - name: occ.standardized
+            description: >-
+              Contributor's self-reported occupation (standardized).
+          - name: is.corp
+            description: >-
+              Indicates whether the contribution is made by a corporate entity or q trade organization
+              (only applies to committees). Takes on the value 'corp' for corporations and trade
+              organizations and is blank otherwise.
+          - name: recipient.name
+            description: >-
+              Name of the recipient candidate or committee.
+          - name: bonica.rid
+            description: >-
+              Unique ID for recipients. Can be matched against candidate database which contains
+              more detailed information on candidates, elections, and constituencies.
+          - name: recipient.party
+            description: >-
+              Party of the recipient (100=DEM; 200=REP; 328 = IND).
+              (Match against candidate database for more detailed party codings.)
+          - name: recipient.type
+            description: >-
+              ('CAND' = candidate; 'COMM' = PAC, organization, or party committee)
+          - name: recipient.state
+            description: >-
+              Two-letter state abbreviation of the recipients.
+          - name: seat
+            description: >-
+              Elected office sought by candidate.
+          - name: election.type
+            description: >-
+              ('P' = primary elections; 'G' = general elections).
+          - name: latitude
+            description: >-
+              Geo-location (latitude).
+          - name: longitude
+            description: >-
+              Geo-location (longitude).
+          - name: gis.confidence
+            description: >-
+              A measure of confidence of the accuracy of the GIS coordinates.
+          - name: contributor.district.90s
+            description: >-
+              Contributor's geocode mapping onto a congressional district with respect to boundaries
+              for 1992-2000.
+          - name: contributor.district.00s
+            description: >-
+              Contributor's geocode mapping onto a congressional district with respect to boundaries
+              for 2002-2010.
+          - name: contributor.district.10s
+            description: >-
+              Contributor's geocode mapping onto a congressional district with respect to boundaries
+              after 2010. Includes updated district boundaries for 2022.
+          - name: censustract
+            description: >-
+              Contributor's geocode mapping onto a census tract.
+          - name: efec.memo
+            description: >-
+              Memo field from FEC electronic filings.
+          - name: efec.memo2
+            description: >-
+              Auxiliary memo field from FEC electronic filings.
+          - name: efec.transaction.id.orig
+            description: >-
+              Original transaction id from FEC electronic filings.
+          - name: bk.ref.transaction.id
+            description: >-
+              Indicates whether the contribution record previously appeared in the database. The
+              value link back to transaction.id. This can be used to remove duplicate entries.
+          - name: efec.org.orig
+            description: >-
+              Original recipient name from from FEC electronic filings.
+          - name: efec.comid.orig
+            description: >-
+              Original committee ID from FEC electronic filings.
+          - name: efec.form.type
+            description: >-
+              Form type from FEC electronic filings.
+          - name: excluded.from.scaling
+            description: >-
+              Indicates whether to exclude score scaling.
+          - name: contributor.cfscore
+            description: >-
+              Contributor's ideal CFscore.
+          - name: candidate.cfscore
+            description: >-
+              Candidate/recipient's CFscore.
