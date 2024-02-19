@@ -7,9 +7,18 @@ WORKDIR /project
 # Install curl
 RUN apt-get update && apt-get install -y curl
 
-# Copy over Meltano project directory
+# Install R
+RUN apt-get install -y --no-install-recommends r-cran-tidyverse
+
+# Install R packages
+RUN R -e "install.packages('languageserver', dependencies=TRUE)"
+RUN R -e "install.packages('duckdb', dependencies=TRUE)"
+RUN R -e "install.packages('here', dependencies=TRUE)"
+RUN R -e "install.packages('ggthemes', dependencies=TRUE)"
+RUN R -e "install.packages('ggrepel', dependencies=TRUE)"
+
+# Copy over project directory
 COPY . .
-RUN meltano install
 
 # Don't allow changes to containerized project files
 ENV MELTANO_PROJECT_READONLY 1
