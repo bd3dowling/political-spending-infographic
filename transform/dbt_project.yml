@@ -14,9 +14,9 @@ log-path: logs
 packages-install-path: dbt_packages
 
 clean-targets:
-- ../docs
 - dbt_packages
 - logs
+- docs
 
 models:
   political_spending_infographic:

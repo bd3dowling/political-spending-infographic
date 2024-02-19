@@ -1,6 +1,6 @@
 # NOTE: The query-params at end are required for drop-box...
 URL := https://www.dropbox.com/scl/fi/hxj358n0bnef8qo9vz7wt/contribDB_2022.csv.gz\?rlkey\=y6bv0bcnhe8roxid62cckaipz\&e\=1
-GZ_FILE := ./data/source/dime_2022_raw.csv.gz
+GZ_FILE := ./extract/dime_2022_raw.csv.gz
 CSV_FILE := $(GZ_FILE:.gz=)
 
 all: fetch build run
@@ -19,11 +19,18 @@ build:
 	meltano install
 	meltano invoke dbt-duckdb deps
 
-# TODO: Add script invocation
-run:
-	meltano invoke dbt-duckdb build
-
-clean:
+load: fetch build
+	meltano run tap-csv target-duckdb
 	rm -f $(CSV_FILE)
 
-.PHONY: all fetch build run clean
+transform: load
+	meltano invoke dbt-duckdb run
+
+# TODO: Add script invocation
+run: fetch build
+	meltano run --full-refresh tap-csv target-duckdb dbt-duckdb:run
+
+infographic: run
+	echo 'running R script'
+
+.PHONY: all fetch build load transform run infographic

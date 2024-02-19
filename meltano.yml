@@ -11,7 +11,7 @@ plugins:
     config:
       files:
       - entity: dime_2022_raw
-        path: $MELTANO_PROJECT_ROOT/data/raw/dime_2022_raw.csv
+        path: $MELTANO_PROJECT_ROOT/extract/dime_2022_raw.csv
         keys:
         - transaction.id
   loaders:
@@ -19,13 +19,13 @@ plugins:
     variant: jwills
     pip_url: target-duckdb~=0.6
     config:
-      filepath: $MELTANO_PROJECT_ROOT/data/warehouse/warehouse.duckdb
+      filepath: $MELTANO_PROJECT_ROOT/data/warehouse.duckdb
       default_target_schema: main
   utilities:
   - name: dbt-duckdb
     variant: jwills
     pip_url: dbt-core dbt-duckdb git+https://github.com/meltano/dbt-ext.git@main
     config:
-      path: $MELTANO_PROJECT_ROOT/data/warehouse/warehouse.duckdb
+      path: $MELTANO_PROJECT_ROOT/data/warehouse.duckdb
       profiles_dir: $MELTANO_PROJECT_ROOT/transform
       skip_pre_invoke: true
