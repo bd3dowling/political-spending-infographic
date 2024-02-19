@@ -1,11 +1,9 @@
 version: 2
 
 sources:
-  - name: dime
-    schema: dime
-    meta:
-      external_location: ../data/source/{dime}.sqlite3
+  - name: warehouse
+    schema: main
     tables:
-      - name: dime
-        identifier: dime
-        description: the main table
+      - name: dime_2022_raw
+        identifier: dime_2022_raw
+        description: Source table loaded by Meltano.

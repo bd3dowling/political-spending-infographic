@@ -1,12 +1,6 @@
 version: 2
 
 models:
-  - name: example_analysis
-    tests:
-      - empty_table
-  - name: example_prep
-    tests:
-      - empty_table
-  - name: example_raw
+  - name: load__subset_convert_dime_2022
     tests:
       - empty_table

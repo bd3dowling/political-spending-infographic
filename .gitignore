@@ -4,6 +4,7 @@
 # Data
 *.csv
 *.csv.gz
+*.duckdb
 
 # DBT/Meltano
 /venv
