@@ -1,0 +1,11 @@
+version: 1
+default_environment: main
+environments:
+- name: main
+include_paths:
+- ./extract/*.meltano.yml
+- ./load/*.meltano.yml
+- ./orchestrate/*.meltano.yml
+- ./transform/*.meltano.yml
+- ./utilities/*.meltano.yml
+- ./mappers/*.meltano.yml

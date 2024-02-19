@@ -1,0 +1,11 @@
+version: 2
+
+sources:
+  - name: dime
+    schema: dime
+    meta:
+      external_location: ../data/source/{dime}.sqlite3
+    tables:
+      - name: dime
+        identifier: dime
+        description: the main table

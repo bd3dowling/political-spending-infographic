@@ -1,0 +1,27 @@
+{
+    "name": "political-spending-infographic-dev-container",
+    "context": "..",
+    "dockerFile": "../Dockerfile",
+    "customizations": {
+        "vscode": {
+            "settings": {
+                "terminal.integrated.shell.linux": "/bin/bash",
+                "python.pythonPath": "/usr/local/bin/python",
+                "python.languageServer": "Pylance",
+                "files.associations": {
+                    "*.sql": "jinja-sql"
+                }
+            },
+            "extensions": [
+                "ms-python.python",
+                "ms-python.vscode-pylance",
+                "ms-vscode.makefile-tools",
+                "redhat.vscode-yaml",
+                "bastienboutonnet.vscode-dbt"
+            ]
+        }
+    },
+    "forwardPorts": [
+        3000
+    ]
+}

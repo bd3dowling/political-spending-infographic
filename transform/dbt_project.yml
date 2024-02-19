@@ -1,0 +1,32 @@
+name: political_spending_infographic
+version: '1.0'
+profile: meltano
+config-version: 2
+
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+
+log-path: logs
+packages-install-path: dbt_packages
+
+clean-targets:
+- ../docs
+- dbt_packages
+- logs
+
+models:
+  political_spending_infographic:
+    raw:
+      +materialized: table
+    prep:
+      +materialized: table
+    analysis:
+      +materialized: external
+
+# external files are only registered as DuckDB views when they are created, not when they are referenced.
+on-run-start:
+  - "{{ register_upstream_external_models() }}"
