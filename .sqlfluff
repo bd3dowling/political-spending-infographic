@@ -2,8 +2,13 @@
 dialect = duckdb
 templater = dbt
 runaway_limit = 10
-max_line_length = 80
+max_line_length = 100
 indent_unit = space
+
+[sqlfluff:templater:dbt]
+project_dir = transform
+profiles_dir = transform
+profile = meltano
 
 [sqlfluff:indentation]
 tab_space_size = 4
