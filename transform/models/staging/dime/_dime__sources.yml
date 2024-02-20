@@ -2,13 +2,13 @@ version: 2
 
 sources:
   - name: warehouse
-    schema: main
+    schema: source
     tables:
-      - name: dime_2022_raw
+      - name: dime_contributions_2022
         description: >-
           The contribution database includes a complete set of contribution records grouped by
-          election cycle. Each row represents and individual transaction between a donor and recipient.
-          (Loaded by meltano; source: https://data.stanford.edu/dime)
+          election cycle. Each row represents and individual transaction between a donor and
+          recipient. (Loaded by meltano; source: https://data.stanford.edu/dime)
         columns:
           - name: cycle
             description: >-
@@ -81,9 +81,9 @@ sources:
               Contributor's self-reported occupation (standardized).
           - name: is.corp
             description: >-
-              Indicates whether the contribution is made by a corporate entity or q trade organization
-              (only applies to committees). Takes on the value 'corp' for corporations and trade
-              organizations and is blank otherwise.
+              Indicates whether the contribution is made by a corporate entity or a trade
+              organization (only applies to committees). Takes on the value 'corp' for corporations
+              and trade organizations and is blank otherwise.
           - name: recipient.name
             description: >-
               Name of the recipient candidate or committee.

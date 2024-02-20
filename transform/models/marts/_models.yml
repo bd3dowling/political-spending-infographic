@@ -1,0 +1,97 @@
+version: 2
+models:
+  - name: contributions
+    description: >-
+      Cleaned DIME contributions data.
+    columns:
+      - name: contribution_id
+        description: >-
+          Unique identifier of contribution.
+        tests:
+          - unique
+          - not_null
+      - name: contribution_date
+        description: >-
+          Date of contribution.
+        tests:
+          - not_null
+      - name: contribution_amount
+        description: >-
+          Dollar amount of contribution.
+        tests:
+          - not_null
+      - name: election_cycle
+        description: >-
+          Election cycle year (e.g. 2016, 2018, 2020, etc.).
+        tests:
+          - not_null
+      - name: election_type
+        description: >-
+          Type of election (one of 'primary', 'general', 'unknown').
+        tests:
+          - accepted_values:
+              values:
+                - primary
+                - general
+                - unknown
+      - name: election_is_federal
+        description: >-
+          Boolean indicating if the election is for a Federal position.
+        tests:
+          - not_null
+      - name: election_seat_type
+        description: >-
+          The type of elected position (e.g. 'senate', 'president', 'house')
+        tests:
+          - not_null
+      - name: contributor_id
+        description: >-
+          Unique ID for each contributor; foreign key to contributors table.
+        tests:
+          - not_null
+      - name: contributor_is_individual
+        description: >-
+          Boolean indicating if the contributor is an individual
+          (and not a corporation, for example).
+        tests:
+          - not_null
+      - name: contributor_state
+        description: >-
+          State in which contributor resides.
+        tests:
+          - relationships:
+              to: ref('state_codes')
+              field: state_code
+      - name: contributor_cf_score
+        description: >-
+          CF score of contributor.
+      - name: recipient_id
+        description: >-
+          Unique ID for each recipient; foreign key to recipients table.
+        tests:
+          - not_null
+      - name: recipient_is_candidate
+        description: >-
+          Boolean indicating if the recipient is a candidate
+          (and not a PAC, for example)
+        tests:
+          - not_null
+      - name: recipient_party
+        description: >-
+          Party associated with recipient.
+        tests:
+          - accepted_values:
+              values:
+                - democrat
+                - republican
+                - independent
+                - unknown
+      - name: recipient_state
+        description: >-
+          State associated with recipient.
+        tests:
+          - relationships:
+              to: ref('state_codes')
+              field: state_code
+      - name: recipient_cf_score
+        description: CF score of recipient.

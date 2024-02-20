@@ -1,31 +1,31 @@
 version: 1
 default_environment: main
 environments:
-- name: main
+  - name: main
 project_id: 0f7b47e6-7268-4193-9522-1773c1ee9fee
 plugins:
   extractors:
-  - name: tap-csv
-    variant: meltanolabs
-    pip_url: git+https://github.com/MeltanoLabs/tap-csv.git
-    config:
-      files:
-      - entity: dime_2022_raw
-        path: $MELTANO_PROJECT_ROOT/extract/dime_2022_raw.csv
-        keys:
-        - transaction.id
+    - name: tap-csv
+      variant: meltanolabs
+      pip_url: git+https://github.com/MeltanoLabs/tap-csv.git
+      config:
+        files:
+          - entity: dime_contributions_2022
+            path: $MELTANO_PROJECT_ROOT/extract/dime_contributions_2022_raw.csv
+            keys:
+              - transaction.id
   loaders:
-  - name: target-duckdb
-    variant: jwills
-    pip_url: target-duckdb~=0.6
-    config:
-      filepath: $MELTANO_PROJECT_ROOT/data/warehouse.duckdb
-      default_target_schema: main
+    - name: target-duckdb
+      variant: jwills
+      pip_url: target-duckdb~=0.6
+      config:
+        filepath: $MELTANO_PROJECT_ROOT/data/warehouse.duckdb
+        default_target_schema: source
   utilities:
-  - name: dbt-duckdb
-    variant: jwills
-    pip_url: dbt-core dbt-duckdb git+https://github.com/meltano/dbt-ext.git@main
-    config:
-      path: $MELTANO_PROJECT_ROOT/data/warehouse.duckdb
-      profiles_dir: $MELTANO_PROJECT_ROOT/transform
-      skip_pre_invoke: true
+    - name: dbt-duckdb
+      variant: jwills
+      pip_url: dbt-core dbt-duckdb git+https://github.com/meltano/dbt-ext.git@main
+      config:
+        path: $MELTANO_PROJECT_ROOT/data/warehouse.duckdb
+        profiles_dir: $MELTANO_PROJECT_ROOT/transform
+        skip_pre_invoke: true

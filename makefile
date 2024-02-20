@@ -1,6 +1,6 @@
 # NOTE: The query-params at end are required for drop-box...
 URL := https://www.dropbox.com/scl/fi/hxj358n0bnef8qo9vz7wt/contribDB_2022.csv.gz\?rlkey\=y6bv0bcnhe8roxid62cckaipz\&e\=1
-GZ_FILE := ./extract/dime_2022_raw.csv.gz
+GZ_FILE := ./extract/dime_contributions_2022_raw.csv.gz
 CSV_FILE := $(GZ_FILE:.gz=)
 
 all: fetch build run

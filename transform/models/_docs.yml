@@ -1,6 +1,0 @@
-version: 2
-
-models:
-  - name: load__subset_convert_dime_2022
-    tests:
-      - empty_table
