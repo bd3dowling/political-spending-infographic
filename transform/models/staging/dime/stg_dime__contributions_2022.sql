@@ -28,7 +28,10 @@ recast_clean as (
         election_cycle::int as election_cycle,
         contributor_cf_score::float as contributor_cf_score,
         recipient_cf_score::float as recipient_cf_score,
-        upper(contributor_state) as contributor_state,
+        coalesce(
+            upper(contributor_state),
+            'ZZ' -- Unknown
+        ) as contributor_state,
         coalesce(recipient_id, 'unknown') as recipient_id,
         coalesce(contributor_id, 'unknown') as contributor_id,
         split_part(sought_seat, ':', 1) = 'federal' as election_is_federal,
