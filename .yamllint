@@ -1,0 +1,11 @@
+extends: default
+ignore: |-
+  venv
+  .meltano
+rules:
+  document-start: disable
+  line-length:
+    max: 100
+  indentation:
+    spaces: 2
+    indent-sequences: true

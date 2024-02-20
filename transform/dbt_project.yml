@@ -14,19 +14,19 @@ log-path: logs
 packages-install-path: dbt_packages
 
 clean-targets:
-- dbt_packages
-- logs
-- docs
+  - dbt_packages
+  - logs
+  - docs
+
+seeds:
+  political_spending_infographic:
+    +schema: source
 
 models:
   political_spending_infographic:
-    raw:
-      +materialized: table
-    prep:
+    staging:
+      +materialized: view
+    marts:
       +materialized: table
     analysis:
-      +materialized: external
-
-# external files are only registered as DuckDB views when they are created, not when they are referenced.
-on-run-start:
-  - "{{ register_upstream_external_models() }}"
+      +materialized: table
