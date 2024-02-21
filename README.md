@@ -5,11 +5,19 @@ This provides a modern, fully extensible and portable modern data stack-in-a-box
 proof-of-concept / template for producing consistent, reproducible, and principled data workflows,
 namely for the production of reports, charts, and infographics.
 
-To generate the project, we suggest running it through docker (via the Dockerfile) or, if on
+The project is setup with one [example infographic](./output/1980_senate_contributions_infographic.pdf)
+to generate which shows some charts relating to the US Federal Senate elections in 1980.
+
+To generate the infographic, we suggest running it through docker (via the Dockerfile) or, if on
 VSCode, by opening the project in a [Dev Container](https://code.visualstudio.com/docs/devcontainers/containers).
 Once in the container, the infographic can be run with just `make`.
 (**Note**: Installation of the `arrow` package can take a while; it's not unexpected for image building
 to take over 10 minutes as a result since it compiles it from source!).
+
+Alternatively, if you create a `python` virtual environment (and maybe you'd like to do the same for `R`),
+if you manually install in `R` the `tidyverse`, `arrow`, `here`, and `ggthemes` packages, and
+manually install in `python` `meltano`, then you should be able to just run `make` from the root
+of the project directory also (you can also install `meltano` via `pipx` if preferred)!
 
 ## Stack
 
@@ -75,3 +83,8 @@ If using as a template adapt the associated `.` files as required! We follow the
   1 TB in size which didn't fit on my local machine during development. It would be worth exploring
   cloud/remote-server approaches that could be taken, especially considering this project is
   already dockerized.
+- There's some bug with the `duckdb` R package which was preventing directly reading from the database
+  in the analysis script, hence why we materialized the analysis models to `.parquet` files and
+  rely on `arrow`. It would be extremely nice to _not_ have to do this, and just use `dbplyr` (or
+  otherwise) to directly query the analysis tables from the `duckdb` database for use in the plots,
+  especially for later years where the data volume can become challenging to load fully into memory.

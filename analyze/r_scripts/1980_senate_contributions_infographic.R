@@ -1,7 +1,6 @@
 library(dplyr)
 library(ggplot2)
 library(ggthemes)
-library(ggrepel)
 library(here)
 library(arrow)
 library(scales)
