@@ -10,3 +10,4 @@ meltano:
       type: duckdb
       threads: 4
       path: "{{ env_var('DBT_DUCKDB_PATH') }}"
+      external_root: "{{ env_var('MELTANO_PROJECT_ROOT') }}/data/parquets"

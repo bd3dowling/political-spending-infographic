@@ -12,7 +12,7 @@ RUN apt-get install -y --no-install-recommends r-cran-tidyverse
 
 # Install R packages
 RUN R -e "install.packages('languageserver', dependencies=TRUE)"
-RUN R -e "install.packages('duckdb', dependencies=TRUE)"
+RUN R -e "install.packages('arrow', dependencies=TRUE)"
 RUN R -e "install.packages('here', dependencies=TRUE)"
 RUN R -e "install.packages('ggthemes', dependencies=TRUE)"
 RUN R -e "install.packages('ggrepel', dependencies=TRUE)"

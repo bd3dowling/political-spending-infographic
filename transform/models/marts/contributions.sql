@@ -1,4 +1,4 @@
-with dime_contributions_2022 as (
+with dime_contributions_1980 as (
     select
         contribution_id,
         contribution_date,
@@ -16,7 +16,7 @@ with dime_contributions_2022 as (
         recipient_party,
         recipient_state,
         recipient_cf_score
-    from {{ ref('stg_dime__contributions_2022') }}
+    from {{ ref('stg_dime__contributions_1980') }}
 )
 
-select * from dime_contributions_2022
+select * from dime_contributions_1980

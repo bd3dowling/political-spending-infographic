@@ -10,8 +10,8 @@ plugins:
     pip_url: git+https://github.com/MeltanoLabs/tap-csv.git
     config:
       files:
-      - entity: dime_contributions_2022
-        path: $MELTANO_PROJECT_ROOT/extract/dime_contributions_2022_raw.csv
+      - entity: dime_contributions_1980
+        path: $MELTANO_PROJECT_ROOT/extract/dime_contributions_1980_raw.csv
         keys:
         - transaction.id
   loaders:
@@ -20,7 +20,7 @@ plugins:
     pip_url: target-duckdb~=0.6
     config:
       filepath: $MELTANO_PROJECT_ROOT/data/warehouse.duckdb
-      default_target_schema: source
+      default_target_schema: main
   utilities:
   - name: dbt-duckdb
     variant: jwills

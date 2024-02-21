@@ -18,10 +18,6 @@ clean-targets:
   - logs
   - docs
 
-seeds:
-  political_spending_infographic:
-    +schema: source
-
 models:
   political_spending_infographic:
     staging:
@@ -29,4 +25,7 @@ models:
     marts:
       +materialized: table
     analysis:
-      +materialized: table
+      +materialized: external
+
+on-run-start:
+  - "{{ register_upstream_external_models() }}"

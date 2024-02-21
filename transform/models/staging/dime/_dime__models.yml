@@ -1,5 +1,5 @@
 version: 2
 
 models:
-  - name: stg_dime__contributions_2022
-    description: Loads, subsets, renames, and recasts DIME 2022 contributions source data.
+  - name: stg_dime__contributions_1980
+    description: Loads, subsets, renames, and recasts DIME 1980 contributions source data.
