@@ -16,7 +16,7 @@ with subset_rename as (
         "recipient.party" as recipient_party,
         "recipient.state" as recipient_state,
         "candidate.cfscore" as recipient_cf_score
-    from {{ source( 'warehouse', 'dime_contributions_2022' ) }}
+    from {{ source( 'warehouse', 'dime_contributions_1980' ) }}
 ),
 -- noqa: enable=RF01,RF03,RF05
 

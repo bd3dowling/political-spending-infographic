@@ -2,9 +2,9 @@ version: 2
 
 sources:
   - name: warehouse
-    schema: source
+    schema: main
     tables:
-      - name: dime_contributions_2022
+      - name: dime_contributions_1980
         description: >-
           The contribution database includes a complete set of contribution records grouped by
           election cycle. Each row represents and individual transaction between a donor and

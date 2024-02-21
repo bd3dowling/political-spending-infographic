@@ -5,6 +5,7 @@
 *.csv
 *.csv.gz
 *.duckdb
+*.parquet
 
 # DBT/Meltano
 /venv

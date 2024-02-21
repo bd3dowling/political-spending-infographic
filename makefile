@@ -1,9 +1,9 @@
 # NOTE: The query-params at end are required for drop-box...
-URL := https://www.dropbox.com/scl/fi/hxj358n0bnef8qo9vz7wt/contribDB_2022.csv.gz\?rlkey\=y6bv0bcnhe8roxid62cckaipz\&e\=1
-GZ_FILE := ./extract/dime_contributions_2022_raw.csv.gz
+URL := "https://www.dropbox.com/scl/fi/gdvpzggkb0in9yruircpi/contribDB_1980.csv.gz?rlkey=rs07632m813k3g85ndek1z16g&e=1"
+GZ_FILE := ./extract/dime_contributions_1980_raw.csv.gz
 CSV_FILE := $(GZ_FILE:.gz=)
 
-all: fetch build run
+all: fetch build load transform infographic
 
 # Rule to download the file and rename it
 $(GZ_FILE):
@@ -19,18 +19,15 @@ build:
 	meltano install
 	meltano invoke dbt-duckdb deps
 
-load: fetch build
-	meltano run tap-csv target-duckdb
+load:
+	meltano run --full-refresh tap-csv target-duckdb
 	rm -f $(CSV_FILE)
 
-transform: load
-	meltano invoke dbt-duckdb run
+transform:
+	meltano invoke dbt-duckdb build --full-refresh
 
-# TODO: Add script invocation
-run: fetch build
-	meltano run --full-refresh tap-csv target-duckdb dbt-duckdb:run
+infographic:
+	Rscript analyze/r_scripts/1980_senate_contributions_infographic.R
+	open output/1980_senate_contributions_infographic.pdf
 
-infographic: run
-	echo 'running R script'
-
-.PHONY: all fetch build load transform run infographic
+.PHONY: all fetch build load transform infographic
